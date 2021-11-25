@@ -1,0 +1,46 @@
+1. Create a new CString
+
+2.Testing Function CreateCString and CStringToCharArray
+Create a new string is "abcd", the string in CString is abcd
+
+3.Testing Function CreateCStringWithChar
+Create a new string is "cccccc", the string in CString is cccccc
+
+4.Testing Function CStringLength
+Create a new string is "abcd123", the string length is 7
+
+5.Testing Function CStringAt
+Create a new string is "abcd123", the char at the position 5 is 2
+The string is "abcd123", the char at the position 2 is c
+
+6.Testing Function CStringSearchChar
+The string is "abcd123abcd", find the 'c' position is 2
+The string is "abcd123abcd", find the 'c' position is 9
+
+7.Testing Function CStringSearchString
+The string is "abcd123123", find the "123" position is 4
+The string is "abcd123123", find another "123" position is 7
+
+8.Testing Function CStringCopy
+The string is "abcd", copy the "123" to first string is 123
+
+9.Testing Function CStringConcatenate
+The string is "abcd", concatenate the "123" to first string is abcd123
+
+10.Testing Function CStringInsertString
+The string is "abcd", insert the "123" to the position 2 is ab123cd
+
+11.Testing Function CStringDelete
+The string is "abcd123abcd", delete the "123" is abcdabcd
+
+11.Testing Function CStringDelete
+The string is "abcd123abcd", substring, the "123" is 123
+
+12.Testing Function CStringIsEmpty
+The string is "abcd123abcd", result of CStringIsEmpty is 0
+The string is "", result of CStringIsEmpty is -2
+The string is NULL, result of CStringIsEmpty is -1
+
+13.Testing Function CStringSetChar
+The string is "abcd123abcd", set position 7 'c' is abcd123cbcd return c
+

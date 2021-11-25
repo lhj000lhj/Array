@@ -1,0 +1,108 @@
+/*
+* @name: README
+* @author: Liu Hejian
+* @number: 18374386
+* @date: 2021-10-21
+* @version: 1.0
+*/
+本项目已经开源，项目需要金额：0 
+这年头，这小项目还搞什么收费
+开源地址：https://github.com/lhj000lhj/CString.git
+命令git clone https://github.com/lhj000lhj/CString.git
+即可下载
+/********************************前提说明**********************************/
+本次作业由于现代化设计的要求并未像老师要求那样抽象string
+string类型一定不是只能拥有一定量的字符组成，因此不能使用char[num]这样的描述方式
+因此使用动态内存来解决如下问题（引入malloc与free两个函数解决string类型长度可变的情况）
+同时CString类型中也就不能只有两个字段，即内容string与长度length，应该还有一个字段容量
+capcity来使能够容纳字符量与实际容纳字符量这两个概念（请参考GCC实现C++标准库std::b-
+asic_string<T>），本质上string的抽象类型是字符容器的实现，因此内存空间采取线性表的实现
+扩容时内存策略没有使用C++标准容器std::vector<T>的实现，有点麻烦，时间不够。
+同时文件打包方式没有采用要求的方式，因为这不是较好的工程风格
+函数命名也没有使用要求，因为这不是存储空间字字如金的年代了需要大量缩写，驼峰命名法既能
+表明含义，同时不需要大量注释说明，再者存储空间并不是那么昂贵，这样的命名方式可能更加合适
+
+
+
+    给老师提个意见：
+需要自己书写api的时候能不能给我们一份函数输入参数产生的行为的明确参考，这样
+您也可以标准化测试我们的代码，否则每个人写的函数行为不同，批改也是非常麻烦的
+标准库的函数已经有前任实现好了，这些比较基本，并不需要重新造轮子
+可能实现一些C语言没有的标准数据结构类型，实现一些算法函数更加有意义一点
+同时应该放开函数交叉使用，自己给自己写函数使用难道不是天经地义的事情吗
+/*************************************************************************/
+
+
+
+整个测试可以在linux下使用文件中的test.sh
+整个文件树通过两个CMakeLists.txt联系起来
+代码是在WSL2(Windows Subsystem for Linux 2: Ubuntu 20.04)编写构建的
+编译器: gcc 9.1.0
+构建工具:cmake最小版本3.0.0
+在拥有cmake 3.0.0以上与gcc时：
+整个测试可以在linux下使用文件中的test.sh一条命令完成构建与测试（会用10s左右时间）
+代码关系如下：
+.
+├── CMakeLists.txt
+├── include
+│   ├── cstring.h
+│   └── cstring_private.h
+├── README
+├── src
+│   └── cstring.c
+├── test
+│   ├── CMakeLists.txt
+│   ├── CStringBase.c
+│   ├── CStringProcess.c
+│   └── CStringSearch.c
+├── TestLog.txt
+└── test.sh
+执行命令
+xxx@xxxx:$ mkdir build
+xxx@xxxx:$ cmake -B build
+xxx@xxxx:$ cd build
+xxx@xxxx:$ make -j4
+这样就完成构建：build目录中构建一个名为libcstring.so的动态库，在./build/test/中构建了所有测试文件
+测试文件如下：
+├── CStringBase
+├── CStringProcess
+├── CStringSearch
+在linux下执行一键构建测试脚本之后log文件名为TestLog.txt
+通过nm导出libcstring.so的符号可以得到动态库中包含如下函数：
+0000000000004060 b completed.8060
+00000000000011f9 T CreateCString
+0000000000001300 T CreateCStringWithChar
+00000000000015a5 T CStringAt
+0000000000001702 T CStringCompare
+000000000000180d T CStringConcatenate
+000000000000145e T CStringCopy
+0000000000001ad1 T CStringDelete
+0000000000001931 T CStringInsertString
+0000000000001c8c T CStringIsEmpty
+0000000000001448 T CStringLength
+0000000000001535 T CStringSearchChar
+00000000000015dd T CStringSearchString
+0000000000001cc6 T CStringSetChar
+0000000000001bed T CStringSubString
+0000000000001c77 T CStringToCharArray
+                 w __cxa_finalize@@GLIBC_2.2.5
+0000000000001140 t deregister_tm_clones
+00000000000013d3 T DestroyCString
+00000000000011b0 t __do_global_dtors_aux
+0000000000003e08 d __do_global_dtors_aux_fini_array_entry
+0000000000004058 d __dso_handle
+0000000000003e10 d _DYNAMIC
+0000000000001d2c t _fini
+00000000000011f0 t frame_dummy
+0000000000003e00 d __frame_dummy_init_array_entry
+0000000000002320 r __FRAME_END__
+                 U free@@GLIBC_2.2.5
+0000000000004000 d _GLOBAL_OFFSET_TABLE_
+                 w __gmon_start__
+0000000000002000 r __GNU_EH_FRAME_HDR
+0000000000001000 t _init
+                 w _ITM_deregisterTMCloneTable
+                 w _ITM_registerTMCloneTable
+                 U malloc@@GLIBC_2.2.5
+0000000000001170 t register_tm_clones
+0000000000004060 d __TMC_END__
