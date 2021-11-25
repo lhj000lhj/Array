@@ -1,3 +1,58 @@
+/*
+* @name: README
+* @number: 18374386
+* @author: Liu Hejian
+* @date: 2021-11-25
+* @version: 1.0
+*/
+
+
+简介：这一工程是数据结构Array的抽象化
+在github上开源https://github.com/lhj000lhj/Array.git
+使用命令  $:> git clone https://github.com/lhj000lhj/Array.git下载或者直接打开网址下载压缩包
+
+构建：
+linux下使用命令
+$:> cmake -B build
+$:> cd build
+$:> make -j2
+构建得到libArray.so动态库
+
+windows使用Visual Studio 2022 Current下使用命令
+PS :> cmake -B build -G "Visual Studio 17 2022"
+PS :> cd build
+PS :> cmake --build ./ --config Release
+就可以构建得到Release版本的库Array.dll 和Array.lib
+
+windows下如果使用MinGW64的话
+PS :> cmake -B build -G "MinGW Makefiles"
+PS :> cd build
+PS :> mingw32-make -j2
+得到libArray.dll libArray.a
+
+MacOS由于本人没有MacOS的计算机所以没有进行测试
+
+使用：
+将 /Array/ 目录下的include文件夹与相关的二进制库文件组合起来，
+包含目录添加include目录，只要包含文件Array.h
+链接目录使用构建得到Array.dll与Array.lib(libArray.so)目录
+windows lib使用Array.lib
+
+windows下构建得到自己的exe之后需要将exe与Array.dll放在一个目录下即可运行
+linux下需要设置默认链接目录为libArray.so的目录
+
+注意：只可以使用Array的指针进行操作，不可以直接使用Array类型
+Array内部成员在外部函数中是不可见的
+
+未来：
+未来可能还会添加一些算法函数使得这个数组的结构更加好用
+
+
+Array共有三个字段分别是 void** object, unsigned long capacity, unsigned long length
+函数说明参考Array.h的注释以及test.c中的用法
+
+符号解析：
+在windows11平台下使用Visual Studio 2022 Current提供的命令行工具dumpbin对导出的符号做出解析如下：
 Microsoft (R) COFF/PE Dumper Version 14.30.30705.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
